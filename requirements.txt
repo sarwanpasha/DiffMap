@@ -1,0 +1,15 @@
+# Core (needed for the demo and for every script)
+numpy>=1.22
+scipy>=1.8
+pandas>=1.4
+torch>=2.1            # CPU build is enough for the demo; a CUDA build for full-scale training
+
+# Full-scale pipeline only (not needed for the demo)
+cyvcf2>=0.30          # reading 1000 Genomes VCFs (build_ld_refs.py, build_real_loci.py)
+pyarrow>=10           # reading the UK Biobank fine-mapping feather file (extract_ukb.py)
+pyliftover>=0.4       # GRCh38 -> GRCh37 liftover of FinnGen (extract_finngen.py)
+
+# Optional baselines (not Python packages):
+#   canonical SuSiE : R >= 4.1 with the CRAN package susieR (tested with 0.14.2)
+#                     install.packages("susieR")
+#   RSparsePro      : git clone https://github.com/zhwm/RSparsePro_LD
