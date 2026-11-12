@@ -1,0 +1,11 @@
+# generated data and outputs
+demo/sample_data/
+demo/outputs/
+runs/
+results/
+*.pt
+
+# Python
+__pycache__/
+*.pyc
+.venv/
