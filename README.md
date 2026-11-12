@@ -116,7 +116,7 @@ pip = oneshot_pip(model, z, maf, R, n=250000)          # one forward pass -> PIP
 ## 4. How the method works
 
 **Data model.** For a locus with $p$ variants, standardized effects $\beta$, causal indicators
-$\gamma \in \{0,1\}^p$, GWAS sample size $n$ and true LD matrix $R$, the marginal z-scores follow
+$\gamma \in \lbrace 0,1 \rbrace^p$, GWAS sample size $n$ and true LD matrix $R$, the marginal z-scores follow
 the summary-statistic (RSS) likelihood
 
 ```math
