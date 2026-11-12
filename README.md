@@ -119,7 +119,9 @@ pip = oneshot_pip(model, z, maf, R, n=250000)          # one forward pass -> PIP
 $\gamma \in \{0,1\}^p$, GWAS sample size $n$ and true LD matrix $R$, the marginal z-scores follow
 the summary-statistic (RSS) likelihood
 
-$$z \mid \beta, R \sim \mathcal{N}\big(\sqrt{n}\,R\,\beta,\; R\big). \tag{1}$$
+```math
+z \mid \beta, R \sim \mathcal{N}\left(\sqrt{n}\, R \beta,\ R\right) \qquad \text{(1)}
+```
 
 Training loci are simulated from Eq. (1) over real LD blocks (`src/sim.py`).
 
@@ -130,13 +132,16 @@ partly masked $\gamma^{(t)}$ together with $(z, R, \text{MAF}, n)$ and predicts,
 coordinate, $\hat p_j = \Pr(\gamma_j = 1 \mid \gamma^{(t)}, z, R)$. It is trained with the
 re-weighted cross-entropy over masked coordinates (`src/train.py`):
 
-$$\mathcal{L}(\theta) = \mathbb{E}_{t,\gamma,z}\;\frac{1}{t\,p}\sum_{j:\,\gamma^{(t)}_j=\text{MASK}}
-\Big[-\gamma_j \log \hat p_j - (1-\gamma_j)\log(1-\hat p_j)\Big]. \tag{2}$$
+```math
+\mathcal{L}(\theta) = \mathbb{E}_{t,\gamma,z} \left[ \frac{1}{t\, p} \sum_{j:\ \gamma^{(t)}_j = \mathrm{MASK}} \Big( -\gamma_j \log \hat{p}_j - (1-\gamma_j) \log (1-\hat{p}_j) \Big) \right] \qquad \text{(2)}
+```
 
 **One-shot PIPs.** With every coordinate masked ($t = 1$), a single forward pass returns the
 marginal posterior inclusion probabilities (`inference.oneshot_pip`):
 
-$$\pi_j = \sigma\big(f_\theta(\gamma^{(T)} = \text{MASK}, z, R, \text{MAF}, n)_j\big). \tag{3}$$
+```math
+\pi_j = \sigma\left( f_\theta\left(\gamma^{(1)} = \mathrm{MASK},\ z,\ R,\ \mathrm{MAF},\ n\right)_j \right) \qquad \text{(3)}
+```
 
 **Architecture.** A pre-norm transformer over one token per variant (features: $z$, $|z|$, MAF and
 the current symbol of $\gamma_j$), with $t$ and $\log_{10} n$ embedded globally and no positional
